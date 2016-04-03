@@ -67,33 +67,40 @@ describe('config', function() {
         });
     });
 
-    describe('resolving a default config', function() {
+    describe.only('resolving a default config', function() {
         describe('non-existant', function() {
             it('should throw on non-existent file', function() {
-                var config = new Config(configPath());
-                assert.deepPropertyVal(config, 'system.projectRoot', '/it/works');
+                var cwd = process.cwd();
+                process.chdir(configPath(''));
+                assert.throws(function() {
+                    Config.getDefaultConfig();
+                });
+                process.chdir(cwd);
             });
         });
 
         describe('.yml', function() {
             it('should return an existent file', function() {
-                var config = new Config(configPath());
-                assert.deepPropertyVal(config, 'system.projectRoot', '/it/works');
+                var cwd = process.cwd();
+                process.chdir(configPath('default-yml'));
+                var defaultConfig = Config.getDefaultConfig();
+                process.chdir(cwd);
+                assert.endsWith(defaultConfig, path.join('default-yml', '.gemini.yml'));
             });
         });
 
-        describe('.js', function() {
-            it('should return an existent file', function() {
-                var config = new Config(configPath());
-                assert.deepPropertyVal(config, 'system.projectRoot', '/it/works');
-            });
-        });
+        // describe('.js', function() {
+        //     it('should return an existent file', function() {
+        //         var config = new Config(configPath());
+        //         assert.deepPropertyVal(config, 'system.projectRoot', '/it/works');
+        //     });
+        // });
 
-        describe('.json', function() {
-            it('should return an existent file', function() {
-                var config = new Config(configPath());
-                assert.deepPropertyVal(config, 'system.projectRoot', '/it/works');
-            });
-        });
+        // describe('.json', function() {
+        //     it('should return an existent file', function() {
+        //         var config = new Config(configPath());
+        //         assert.deepPropertyVal(config, 'system.projectRoot', '/it/works');
+        //     });
+        // });
     });
 });
