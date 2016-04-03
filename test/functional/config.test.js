@@ -66,4 +66,34 @@ describe('config', function() {
             });
         });
     });
+
+    describe('resolving a default config', function() {
+        describe('non-existant', function() {
+            it('should throw on non-existent file', function() {
+                var config = new Config(configPath());
+                assert.deepPropertyVal(config, 'system.projectRoot', '/it/works');
+            });
+        });
+
+        describe('.yml', function() {
+            it('should return an existent file', function() {
+                var config = new Config(configPath());
+                assert.deepPropertyVal(config, 'system.projectRoot', '/it/works');
+            });
+        });
+
+        describe('.js', function() {
+            it('should return an existent file', function() {
+                var config = new Config(configPath());
+                assert.deepPropertyVal(config, 'system.projectRoot', '/it/works');
+            });
+        });
+
+        describe('.json', function() {
+            it('should return an existent file', function() {
+                var config = new Config(configPath());
+                assert.deepPropertyVal(config, 'system.projectRoot', '/it/works');
+            });
+        });
+    });
 });
