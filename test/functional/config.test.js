@@ -67,7 +67,7 @@ describe('config', function() {
         });
     });
 
-    describe.only('resolving a default config', function() {
+    describe('resolving a default config', function() {
         describe('non-existant', function() {
             it('should throw on non-existent file', function() {
                 var cwd = process.cwd();
