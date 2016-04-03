@@ -85,22 +85,28 @@ describe('config', function() {
                 process.chdir(configPath('default-yml'));
                 var defaultConfig = Config.getDefaultConfig();
                 process.chdir(cwd);
-                assert.endsWith(defaultConfig, path.join('default-yml', '.gemini.yml'));
+                assert.match(defaultConfig, /default-yml[\/\\]\.gemini\.yml/);
             });
         });
 
-        // describe('.js', function() {
-        //     it('should return an existent file', function() {
-        //         var config = new Config(configPath());
-        //         assert.deepPropertyVal(config, 'system.projectRoot', '/it/works');
-        //     });
-        // });
+        describe('.js', function() {
+            it('should return an existent file', function() {
+                var cwd = process.cwd();
+                process.chdir(configPath('default-js'));
+                var defaultConfig = Config.getDefaultConfig();
+                process.chdir(cwd);
+                assert.match(defaultConfig, /default-js[\/\\]\.gemini\.js/);
+            });
+        });
 
-        // describe('.json', function() {
-        //     it('should return an existent file', function() {
-        //         var config = new Config(configPath());
-        //         assert.deepPropertyVal(config, 'system.projectRoot', '/it/works');
-        //     });
-        // });
+        describe('.json', function() {
+            it('should return an existent file', function() {
+                var cwd = process.cwd();
+                process.chdir(configPath('default-json'));
+                var defaultConfig = Config.getDefaultConfig();
+                process.chdir(cwd);
+                assert.match(defaultConfig, /default-json[\/\\]\.gemini\.json/);
+            });
+        });
     });
 });
